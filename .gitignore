@@ -1,1 +1,6 @@
 gridded_*
+.Rproj.user
+combine_rasters.R
+combined/*
+forest_richness.R
+rasterize_richness.R
