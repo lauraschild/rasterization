@@ -10,31 +10,21 @@ lapply(packages,
        quietly = TRUE)
 
 #settings
-x_resolution <- 5 #in degrees
-y_resolution <- 5 #in degrees
+grid_sizes <- c(1,2,5,10) #in degrees
 temporal_resolution <- 500 #in yrs (14000 should be divisible by temp resolution without remainder!)
 
 #load reconstructions for all three NH continents
-# asia <- "12793806/files/Asia_complete_revised.csv?download=1"
-# north_america <- "12793806/files/North_America_complete_revised.csv?download=1"
-# europe <- "12793806/files/Europe_complete_revised.csv?download=1"
-asia <- "Asia_complete_revised_SD.csv"
-europe <- "Europe_complete_revised_SD.csv"
-north_america <- "North_America_complete_revised_SD.csv"
+asia <- "12800159/files/Asia_complete_revised_SD.csv?download=1"
+north_america <- "12800159/files/North_America_complete_revised_SD.csv?download=1"
+europe <- "12800159/files/Europe_complete_revised_SD.csv?download=1"
+
 
 links <- c(asia, north_america, europe)
 
-# get_data <- function(link){
-#   path <- "https://zenodo.org/records/"
-#   data.table::fread(paste0(path,link)) %>% 
-#     as.data.frame() %>% 
-#     return()
-# }
-
 get_data <- function(link){
-  path <- "//dmawi.de/potsdam/data/bioing/user/lschild/optimize_REVEALS/output/reconstructions/for_upload/"
-  data.table::fread(paste0(path,link)) %>% 
-    as.data.frame() %>% 
+  path <- "https://zenodo.org/records/"
+  data.table::fread(paste0(path,link)) %>%
+    as.data.frame() %>%
     return()
 }
 
@@ -70,10 +60,6 @@ delta_method <- function(v){
 
 
 #grid the data
-#create grid
-
-grid_sizes <- rev(c(1,2,5,10))
-
 for(size in grid_sizes){
   y_resolution <- size
   x_resolution <- size
@@ -115,42 +101,6 @@ for(size in grid_sizes){
               validity = validity > 1,
               across(contains("mean of cover"), mean),
               across(contains("sd of cover"), delta_method)) 
-  
-  #plot gridded data
-  world <- rnaturalearth::ne_countries(scale = "small", returnclass = "sf")
-  
-  # grid %>% 
-  #   rasterToPolygons() %>% 
-  #   st_as_sf() %>% 
-  #   rename(cell = layer) %>% 
-  #   merge(NH_grid,
-  #         by = "cell",
-  #         all.y = TRUE) %>% 
-  #   mutate(validity = validity >1) %>% 
-  #   filter(validity) %>% 
-  #   ggplot()+
-  #   geom_sf(data = world,
-  #           col = "darkgrey",
-  #           fill = NA)+
-  #   geom_sf(aes(fill = forest_mean,
-  #               col = validity))+
-  #   coord_sf(ylim = c(0,90))+
-  #   scale_color_manual(values = c("red",NA),
-  #                      limits = c(FALSE,TRUE),
-  #                      labels = c("not enough records"),
-  #                      na.value = NA)+
-  #   facet_wrap(.~Age_slice)+
-  #   labs(col = "",
-  #        fill = "forest cover")+
-  #   theme_void()+
-  #   scale_fill_viridis_c(direction = -1)+
-  #   theme(legend.position = "bottom")
-  # 
-  # #save plot
-  # ggsave(paste0("gridded_overview_",x_resolution,".png"),
-  #        width = 10,
-  #        height = 5)
-  
 
   #save data
   merged_grid <-grid %>% 

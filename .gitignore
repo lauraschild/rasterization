@@ -4,3 +4,5 @@ combine_rasters.R
 combined/*
 forest_richness.R
 rasterize_richness.R
+SD_*
+empty_*
