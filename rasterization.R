@@ -66,10 +66,10 @@ for(size in grid_sizes){
   
   
   grid <- raster(nrow = 90/y_resolution,
-                 ncol = 180/x_resolution,
+                 ncol = 360/x_resolution,
                  ymn = 0,
                  ymx = 90)
-  values(grid)  <- 1:(90/y_resolution*180/x_resolution)
+  values(grid)  <- 1:(90/y_resolution*360/x_resolution)
   
   #get record coordinates
   coords <- NH_sliced %>% 
