@@ -14,9 +14,9 @@ grid_sizes <- c(1,2,5,10) #in degrees
 temporal_resolution <- 500 #in yrs (14000 should be divisible by temp resolution without remainder!)
 
 #load reconstructions for all three NH continents
-asia <- "12800159/files/Asia_complete_revised_SD.csv?download=1"
-north_america <- "12800159/files/North_America_complete_revised_SD.csv?download=1"
-europe <- "12800159/files/Europe_complete_revised_SD.csv?download=1"
+asia <- "13902921/files/Asia_complete_revised_SD_rounded.csv?download=1"
+north_america <- "13902921/files/North_America_complete_revised_SD_rounded.csv?download=1"
+europe <- "13902921/files/Europe_complete_revised_SD_rounded.csv?download=1"
 
 
 links <- c(asia, north_america, europe)
